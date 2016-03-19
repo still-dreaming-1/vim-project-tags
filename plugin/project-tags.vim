@@ -28,6 +28,13 @@ function! s:GeneratePhpTags()
 	echo 'out: '.l:out
 endfunction
 
+function! s:GenerateJsTags()
+	let l:project_root_dir_path= s:FindProjectRoot()
+	let l:script_parent_dir= s:ParseParentDir(s:script_dir)
+	let l:out= system('sh '.l:script_parent_dir.'/scripts/generate_js_tags.sh '.l:project_root_dir_path)
+	echo 'out: '.l:out
+endfunction
+
 function! s:FindProjectRoot()
 	let l:buffer_dir_path = expand("%:h")
 	return s:FindProjectRootRecursive(l:buffer_dir_path)
@@ -68,4 +75,5 @@ augroup <SID>mapping_group
 	" removes all autocmd in group
 	autocmd!
 	autocmd bufwritepost *.php silent call s:GeneratePhpTags()
+	autocmd bufwritepost *.js silent call s:GenerateJsTags()
 augroup END
