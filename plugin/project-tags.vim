@@ -20,10 +20,21 @@
 " overwrits previously stored values in this variable because the file is
 " sourced just before the variable is used.
 
+let s:script_dir= expand('<sfile>:p:h')
 function! s:GeneratePhpTags()
 	let l:project_root_dir_path= s:FindProjectRoot()
-	let l:out= system('sh '.$HOME.'/.config/nvim/generate_php_tags.sh '.l:project_root_dir_path)
-	echo l:out
+	let l:script_parent_dir= s:ParseParentDir(s:script_dir)
+	let l:out= system('sh '.l:script_parent_dir.'/scripts/generate_php_tags.sh '.l:project_root_dir_path)
+	echo 'out: '.l:out
+endfunction
+
+function s:GetDirectoryOfPath(path)
+	let l:dir= system("dirname '".a:path."'")
+	let l:len = len(l:dir)
+	if l:dir[l:len - 1] == "\n"
+		let l:dir= l:dir[0 : l:len - 2]
+	endif
+	return l:dir
 endfunction
 
 function! s:FindProjectRoot()
