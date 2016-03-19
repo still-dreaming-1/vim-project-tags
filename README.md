@@ -1,2 +1,4 @@
 # vim-project-tags
-Define your project structure for an improved tags experience.
+An improved tags experience based on the concept of projects.
+
+Coming soon: Define your project structure for an even better tags experience.
