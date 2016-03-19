@@ -21,10 +21,10 @@
 " sourced just before the variable is used.
 
 let s:script_dir= expand('<sfile>:p:h')
-function! s:GenerateTags(script_name)
+function! s:GenerateTags(file_extension)
 	let l:project_root_dir_path= s:FindProjectRoot()
 	let l:script_parent_dir= s:ParseParentDir(s:script_dir)
-	let l:out= system('sh '.l:script_parent_dir.'/scripts/'.a:script_name.' '.l:project_root_dir_path)
+	let l:out= system('sh '.l:script_parent_dir.'/scripts/generate_tags.sh '.l:project_root_dir_path.' '.a:file_extension)
 	echo 'out: '.l:out
 endfunction
 
@@ -67,6 +67,6 @@ endfunction
 augroup <SID>mapping_group
 	" removes all autocmd in group
 	autocmd!
-	autocmd bufwritepost *.php silent call s:GenerateTags('generate_php_tags.sh')
-	autocmd bufwritepost *.js silent call s:GenerateTags('generate_js_tags.sh')
+	autocmd bufwritepost *.php silent call s:GenerateTags('php')
+	autocmd bufwritepost *.js silent call s:GenerateTags('js')
 augroup END
