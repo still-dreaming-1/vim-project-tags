@@ -28,15 +28,6 @@ function! s:GeneratePhpTags()
 	echo 'out: '.l:out
 endfunction
 
-function s:GetDirectoryOfPath(path)
-	let l:dir= system("dirname '".a:path."'")
-	let l:len = len(l:dir)
-	if l:dir[l:len - 1] == "\n"
-		let l:dir= l:dir[0 : l:len - 2]
-	endif
-	return l:dir
-endfunction
-
 function! s:FindProjectRoot()
 	let l:buffer_dir_path = expand("%:h")
 	return s:FindProjectRootRecursive(l:buffer_dir_path)
