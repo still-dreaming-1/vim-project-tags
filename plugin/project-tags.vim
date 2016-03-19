@@ -64,9 +64,11 @@ function! s:ParseParentDir(dir_path)
 	return l:parent_dir
 endfunction
 
+let s:extension_l= ['php','js']
 augroup <SID>mapping_group
 	" removes all autocmd in group
 	autocmd!
-	autocmd bufwritepost *.php silent call s:GenerateTags('php')
-	autocmd bufwritepost *.js silent call s:GenerateTags('js')
+	for s:extension in s:extension_l
+		execute 'autocmd bufwritepost *.'.s:extension.' silent call s:GenerateTags("'.s:extension.'")'
+	endfor
 augroup END
