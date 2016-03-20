@@ -20,11 +20,13 @@
 " overwrits previously stored values in this variable because the file is
 " sourced just before the variable is used.
 
-let s:script_dir= expand('<sfile>:p:h')
 function! s:GenerateTags(file_extension)
 	let l:project_root_dir_path= s:FindProjectRoot()
-	let l:script_parent_dir= s:ParseParentDir(s:script_dir)
-	let l:out= system('sh '.l:script_parent_dir.'/scripts/generate_tags.sh '.l:project_root_dir_path.' '.a:file_extension)
+	let l:tags_filename= a:file_extension.'tags'
+	let l:tags_filepath= l:project_root_dir_path.'/'.l:tags_filename
+	let l:command= "find -wholename '".l:project_root_dir_path."/*".a:file_extension."' -exec ctags -f '".l:tags_filepath."' {} +"
+	echo 'command: '.l:command
+	let l:out= system(l:command)
 	echo 'out: '.l:out
 endfunction
 
