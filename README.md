@@ -5,5 +5,5 @@ This will search for your project root and save separate tag files for PHP and J
 
 **Coming soon:**
 * Define your project structure for an even better tags experience.
-* Overwrite the ctags executable name.
+* Option to overwrite the ctags executable name.
 * Easily add support for any taggable language yourself.
