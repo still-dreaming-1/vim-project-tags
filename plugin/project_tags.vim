@@ -26,7 +26,12 @@ function! s:GenerateTags(file_extension)
 	let l:tags_filepath= l:project_root_dir_path.'/'.l:tags_filename
 	let l:rm_out= system('rm -f "'.l:tags_filepath.'"')
 	echo 'rm out: '.l:rm_out
-	let l:command= "find -wholename '".l:project_root_dir_path."/*".a:file_extension."' -exec ctags --append=yes -f '".l:tags_filepath."' {} +"
+	if exists('g:project_tags_ctags_path')
+		let l:ctags= g:project_tags_ctags_path
+	else
+		let l:ctags= 'ctags'
+	endif
+	let l:command= "find -wholename '".l:project_root_dir_path."/*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
 	echo 'command: '.l:command
 	let l:out= system(l:command)
 	echo 'out: '.l:out
