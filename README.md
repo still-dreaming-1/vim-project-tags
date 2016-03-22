@@ -7,6 +7,9 @@ Out of the box, this only supports JavaScript and PHP. But you can easily add su
 
 `call project_tags#add_extension('py')`
 
+You can also provide a custom executable name or full path to to your ctags. Example:
+
+`let g:project_tags_ctags_path= 'myctags'`
+
 **Coming soon:**
 * Define your project structure for an even better tags experience.
-* Option to overwrite the ctags executable name.
