@@ -69,7 +69,7 @@ function! s:ParseParentDir(dir_path)
 endfunction
 
 call project_tags#add_extension('php')
-"call project_tags#add_extension('js')
+call project_tags#add_extension('js')
 augroup <SID>mapping_group
 	" removes all autocmd in group
 	autocmd!
