@@ -3,7 +3,10 @@ An improved tags experience based on the concept of projects.
 
 This will search for your project root and save separate tag files for PHP and JavaScript files. It assumes the existence of a .git directory indicates your project root. Creates the tag files automatically when you save. If you save a .php file, it only creates tags for other .php files in the project, and saves them in their own phptags file. If you save a .js file, it generates tags in a separate jstags file. When you are editing a file, and try to do a code lookup using tags, it will only search one tags file matching the language of the file you are editing, based on file extension. The point of all this is to avoid false positives and keep the tag matches to a minimum.
 
+Out of the box, this only supports JavaScript and PHP. But you can easily add support for any taggable language yourself. Just call the `project_tags#add_extension()` function in your config and pass it a string with the file extension of the language you want to create tags for. Call it again for each language. This only works for languages that rely on a single file extension. In other words, it won't work with c because it is split between .c and .h files. Here is an example that adds support for python:
+
+`call project_tags#add_extension('py')`
+
 **Coming soon:**
 * Define your project structure for an even better tags experience.
 * Option to overwrite the ctags executable name.
-* Easily add support for any taggable language yourself.
