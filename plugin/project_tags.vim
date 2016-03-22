@@ -74,6 +74,7 @@ augroup <SID>mapping_group
 	" removes all autocmd in group
 	autocmd!
 	for s:extension in g:project_tags_extension_l
+		execute 'autocmd BufRead *.'.s:extension.' setlocal tags=./'.s:extension.'tags;'
 		execute 'autocmd bufwritepost *.'.s:extension.' silent call s:GenerateTags("'.s:extension.'")'
 	endfor
 augroup END
