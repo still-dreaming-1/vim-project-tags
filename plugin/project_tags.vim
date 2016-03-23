@@ -31,14 +31,15 @@ function! s:GenerateTags(file_extension)
 	else
 		let l:ctags= 'ctags'
 	endif
-	let l:command= "find -wholename '".l:project_root_dir_path."/*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
+	let l:command= "find '".l:project_root_dir_path."' -name '*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
 	echo 'command: '.l:command
 	let l:out= system(l:command)
 	echo 'out: '.l:out
 endfunction
 
 function! s:FindProjectRoot()
-	let l:buffer_dir_path = expand("%:h")
+	let l:buffer_dir_path = expand("%:p:h")
+	echo 'buffer dir path: '.l:buffer_dir_path
 	return s:FindProjectRootRecursive(l:buffer_dir_path)
 endfunction
 
