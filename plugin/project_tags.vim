@@ -53,25 +53,12 @@ function! s:FindProjectRootRecursive(dir_path)
 	endif
 	echo 'failed git path: '.l:git_dir_path
 	echo 'failed git path lenght: '.len(l:git_dir_path)
-	let l:parent_dir_path= s:ParseParentDir(a:dir_path)
+	let l:parent_dir_path= project_tags#parse_parent_dir(a:dir_path)
 	if l:parent_dir_path == '/'
 		echo 'no parent dir. parent dir= '.l:parent_dir_path
 		return 0
 	endif
 	return s:FindProjectRootRecursive(l:parent_dir_path)
-endfunction
-
-function! s:ParseParentDir(dir_path)
-	echo 'original dir '.a:dir_path
-	let l:parent_dir= system("dirname '".a:dir_path."'")
-	let l:len = len(l:parent_dir)
-	if l:parent_dir[l:len - 1] == "\n"
-		echo 'found newline in parent dir'
-		let l:parent_dir= l:parent_dir[0 : l:len - 2]
-	endif
-	echo 'parent dir '.l:parent_dir
-	echo 'parent dir length: '.len(l:parent_dir)
-	return l:parent_dir
 endfunction
 
 call project_tags#add_extension('php')
