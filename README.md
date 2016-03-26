@@ -13,7 +13,7 @@ You can also provide a custom executable name or full path to to your ctags. Exa
 
 Installation:
 
-Install it the normal way you install Vim plugins. This also depends on the vim-elhiv plugin, so you will have to install that as well. https://github.com/still-dreaming-1/vim-elhiv/tree/master
+Install it the normal way you install Vim plugins. This also depends on the [vim-elhiv](https://github.com/still-dreaming-1/vim-elhiv/tree/master) plugin, so you will have to install that as well. 
 
 **Coming soon:**
 * Define your project structure for an even better tags experience.
