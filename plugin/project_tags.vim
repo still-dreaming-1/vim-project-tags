@@ -22,6 +22,10 @@
 
 function! s:GenerateTags(file_extension)
 	let l:project_root_dir_path= s:FindProjectRoot()
+	if l:project_root_dir_path == ''
+		echo 'No project root found. Not generating tags'
+		return
+	endif
 	let l:tags_filename= a:file_extension.'tags'
 	let l:tags_filepath= l:project_root_dir_path.'/'.l:tags_filename
 	let l:rm_out= system('rm -f "'.l:tags_filepath.'"')
@@ -54,11 +58,11 @@ function! s:FindProjectRootRecursive(dir_path)
 		return a:dir_path
 	endif
 	echo 'failed git path: '.l:git_dir_path
-	echo 'failed git path lenght: '.len(l:git_dir_path)
+	echo 'failed git path length: '.len(l:git_dir_path)
 	let l:parent_dir_path= elhiv#parse_parent_dir(a:dir_path)
-	if l:parent_dir_path == 0
+	if l:parent_dir_path == ''
 		echo 'no parent dir. parent dir= '.l:parent_dir_path
-		return 0
+		return ''
 	endif
 	return s:FindProjectRootRecursive(l:parent_dir_path)
 endfunction
