@@ -42,9 +42,9 @@ function! s:GenerateTags(file_extension)
 endfunction
 
 function! s:FindProjectRoot()
-	let l:buffer_dir_path = expand("%:p:h")
-	echo 'buffer dir path: '.l:buffer_dir_path
-	return s:FindProjectRootRecursive(l:buffer_dir_path)
+	let l:buffer_dir = l_dir#new(expand("%:p:h"))
+	echo 'buffer dir path: '.l:buffer_dir.path
+	return s:FindProjectRootRecursive(l:buffer_dir.path)
 endfunction
 
 function! s:FindProjectRootRecursive(dir_path)
