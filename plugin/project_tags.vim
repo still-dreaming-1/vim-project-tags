@@ -52,7 +52,7 @@ function! s:FindProjectRootRecursive(dir)
 	" the following commented out line is from when I started rewriting this function to use a project file instead of the .git directory
 	" let filepath= findfile('project_tags.project.vim', l:dir_path.';')
 	echo 'recursive dir path '.a:dir.path
-	echo 'recursive dir path length: '.len(l:dir_path)
+	echo 'recursive dir path length: '.len(a:dir.path)
 	let l:git_dir_path = l:dir_path.'/.git'
 	if isdirectory(l:git_dir_path)
 		echo 'found git dir: '.l:git_dir_path
