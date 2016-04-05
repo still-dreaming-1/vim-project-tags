@@ -22,7 +22,7 @@
 
 function! s:GenerateTags(file_extension)
 	let l:project_root_dir= s:FindProjectRoot()
-	if l:project_root_dir == ''
+	if l:project_root_dir == l#null()
 		echo 'No project root found. Not generating tags'
 		return
 	endif
@@ -60,7 +60,7 @@ function! s:FindProjectRootRecursive(dir)
 	echo 'failed git path: '.l:git_dir.path
 	echo 'failed git path length: '.len(l:git_dir.path)
 	let l:parent_dir= a:dir.parent()
-	if l:parent_dir == ''
+	if l:parent_dir == l#null()
 		echo 'no parent dir.'
 		return ''
 	endif
