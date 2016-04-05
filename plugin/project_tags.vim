@@ -21,13 +21,13 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	let l:project_root_dir_path= s:FindProjectRoot()
-	if l:project_root_dir_path == ''
+	let l:project_root_dir= s:FindProjectRoot()
+	if l:project_root_dir == ''
 		echo 'No project root found. Not generating tags'
 		return
 	endif
 	let l:tags_filename= a:file_extension.'tags'
-	let l:tags_filepath= l:project_root_dir_path.'/'.l:tags_filename
+	let l:tags_filepath= l:project_root_dir.path.'/'.l:tags_filename
 	let l:rm_out= system('rm -f "'.l:tags_filepath.'"')
 	echo 'rm out: '.l:rm_out
 	if exists('g:project_tags_ctags_path')
@@ -35,7 +35,7 @@ function! s:GenerateTags(file_extension)
 	else
 		let l:ctags= 'ctags'
 	endif
-	let l:command= "find '".l:project_root_dir_path."' -name '*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
+	let l:command= "find '".l:project_root_dir.path."' -name '*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
 	echo 'command: '.l:command
 	let l:out= system(l:command)
 	echo 'out: '.l:out
@@ -56,7 +56,7 @@ function! s:FindProjectRootRecursive(dir)
 	let l:git_dir= l_dir#new(a:dir.path.'/.git')
 	if l:git_dir.exists
 		echo 'found git dir: '.l:git_dir.path
-		return a:dir.path
+		return a:dir
 	endif
 	echo 'failed git path: '.l:git_dir.path
 	echo 'failed git path length: '.len(l:git_dir.path)
