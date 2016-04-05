@@ -60,12 +60,12 @@ function! s:FindProjectRootRecursive(dir_path)
 	echo 'failed git path: '.l:git_dir_path
 	echo 'failed git path length: '.len(l:git_dir_path)
 	let l:dir= l_dir#new(a:dir_path)
-	let l:parent_dir_path= l:dir.parent().path
-	if l:parent_dir_path == ''
-		echo 'no parent dir. parent dir= '.l:parent_dir_path
+	let l:parent_dir= l:dir.parent()
+	if l:parent_dir == ''
+		echo 'no parent dir.'
 		return ''
 	endif
-	return s:FindProjectRootRecursive(l:parent_dir_path)
+	return s:FindProjectRootRecursive(l:parent_dir.path)
 endfunction
 
 call project_tags#add_extension('php')
