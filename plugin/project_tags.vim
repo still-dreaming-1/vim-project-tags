@@ -42,30 +42,31 @@ function! s:GenerateTags(file_extension)
 endfunction
 
 function! s:FindProjectRoot()
-	let l:buffer_dir = l_dir#new(expand("%:p:h"))
+	let l:buffer_dir= l_dir#new(expand("%:p:h"))
 	echo 'buffer dir path: '.l:buffer_dir.path
-	return s:FindProjectRootRecursive(l:buffer_dir.path)
+	return s:FindProjectRootRecursive(l:buffer_dir)
 endfunction
 
-function! s:FindProjectRootRecursive(dir_path)
+function! s:FindProjectRootRecursive(dir)
+	l:dir_path= a:dir.path
 	" the following commented out line is from when I started rewriting this function to use a project file instead of the .git directory
-	" let filepath= findfile('project_tags.project.vim', a:dir_path.';')
-	echo 'recursive dir path '.a:dir_path
-	echo 'recursive dir path length: '.len(a:dir_path)
-	let l:git_dir_path = a:dir_path.'/.git'
+	" let filepath= findfile('project_tags.project.vim', l:dir_path.';')
+	echo 'recursive dir path '.l:dir_path
+	echo 'recursive dir path length: '.len(l:dir_path)
+	let l:git_dir_path = l:dir_path.'/.git'
 	if isdirectory(l:git_dir_path)
 		echo 'found git dir: '.l:git_dir_path
-		return a:dir_path
+		return l:dir_path
 	endif
 	echo 'failed git path: '.l:git_dir_path
 	echo 'failed git path length: '.len(l:git_dir_path)
-	let l:dir= l_dir#new(a:dir_path)
+	let l:dir= l_dir#new(l:dir_path)
 	let l:parent_dir= l:dir.parent()
 	if l:parent_dir == ''
 		echo 'no parent dir.'
 		return ''
 	endif
-	return s:FindProjectRootRecursive(l:parent_dir.path)
+	return s:FindProjectRootRecursive(l:parent_dir)
 endfunction
 
 call project_tags#add_extension('php')
