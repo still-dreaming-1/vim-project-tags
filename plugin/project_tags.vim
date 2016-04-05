@@ -54,13 +54,12 @@ function! s:FindProjectRootRecursive(dir)
 	echo 'recursive dir path '.a:dir.path
 	echo 'recursive dir path length: '.len(a:dir.path)
 	let l:git_dir= l_dir#new(a:dir.path.'/.git')
-	let l:git_dir_path= l:git_dir.path
-	if isdirectory(l:git_dir_path)
-		echo 'found git dir: '.l:git_dir_path
+	if isdirectory(l:git_dir.path)
+		echo 'found git dir: '.l:git_dir.path
 		return a:dir.path
 	endif
-	echo 'failed git path: '.l:git_dir_path
-	echo 'failed git path length: '.len(l:git_dir_path)
+	echo 'failed git path: '.l:git_dir.path
+	echo 'failed git path length: '.len(l:git_dir.path)
 	let l:parent_dir= a:dir.parent()
 	if l:parent_dir == ''
 		echo 'no parent dir.'
