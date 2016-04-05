@@ -48,9 +48,8 @@ function! s:FindProjectRoot()
 endfunction
 
 function! s:FindProjectRootRecursive(dir)
-	l:dir_path= a:dir.path
 	" the following commented out line is from when I started rewriting this function to use a project file instead of the .git directory
-	" let filepath= findfile('project_tags.project.vim', l:dir_path.';')
+	" let filepath= findfile('project_tags.project.vim', a:dir.path.';')
 	echo 'recursive dir path '.a:dir.path
 	echo 'recursive dir path length: '.len(a:dir.path)
 	let l:git_dir= l_dir#new(a:dir.path.'/.git')
