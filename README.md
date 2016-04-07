@@ -17,6 +17,8 @@ Install it the normal way you install Vim plugins. This also depends on the [vim
 
 **Coming soon**
 * Define your project structure for an even better tags experience.
+* More automated tests to keep the master branch more stable.
+* Continous integration to keep the master branch more stable.
 
 **Versions**
 
