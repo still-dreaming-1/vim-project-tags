@@ -16,9 +16,11 @@ You can also provide a custom executable name or full path to to your ctags. Exa
 Install it the normal way you install Vim plugins. This also depends on the [vim-elhiv](https://github.com/still-dreaming-1/vim-elhiv/tree/master) plugin, so you will have to install that as well. 
 
 **Coming soon**
-* Define your project structure for an even better tags experience.
 * More automated tests to keep the master branch more stable.
 * Continous integration to keep the master branch more stable.
+* Case sensitive file extension support when you want to add support for other languages
+* When you add support for other languages, adding languages that are already supported will be ignored. This means you can just specify all the file extensions you want to generate tags for without worrying about whether there is already built in support for them or not.
+* Define your project structure for an even better tags experience.
 
 **Versions**
 
