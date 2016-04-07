@@ -17,3 +17,7 @@ Install it the normal way you install Vim plugins. This also depends on the [vim
 
 **Coming soon:**
 * Define your project structure for an even better tags experience.
+
+**Versions**
+
+I recommend just using the latest commit on the master branch. That way it will work correctly with the latest commit on the master branch of the vim-elhiv library plugin. I haven't yet figured out a good way to tie specific version releases to a specific version of vim-elhiv. If you want to use a specific version you will have to compare the commit date and time to that of the commits to vim-elhiv and try it with the vim-elhiv commit just before the vim-project-tags release. If that doesn't work sometimes I find a bug in vim-elhvi and quickly fix it so it may work better with the following vim-elhiv commit. Currently I am working on adding automated tests to keep the master branch more stable.
