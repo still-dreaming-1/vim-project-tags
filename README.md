@@ -20,7 +20,7 @@ Install it the normal way you install Vim plugins. This also depends on the [vim
 * Continous integration to keep the master branch more stable.
 * Case sensitive file extension support when you want to add support for other languages.
 * When you add support for other languages, adding languages that are already supported will be ignored. This means you can just specify all the file extensions you want to generate tags for without worrying about whether there is already built in support for them or not.
-* Define your project structure for an even better tags experience.
+* Define your project structure for an even better tags experience. This will also make this plugin work independently of git so you can use it with our without git or with other version control systems.
 
 **Versions**
 
