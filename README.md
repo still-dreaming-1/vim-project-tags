@@ -7,6 +7,8 @@ Out of the box, this only supports JavaScript and PHP. But you can easily add su
 
 `call project_tags#add_extension('py')`
 
+You don't need to worry about whether you are adding support for an already supported language. If you call that function with a duplicate file extension, it will just be ignored. This means that if you prever, you can just call that function for each file extension you want to create tags for without worrying about whether or not the plugin already has built in support for that language.
+
 You can also provide a custom executable name or full path to to your ctags. Example:
 
 `let g:project_tags_ctags_path= 'myctags'`
@@ -18,7 +20,6 @@ Install it the normal way you install Vim plugins. This also depends on the [vim
 **Coming soon**
 * More automated tests to keep the master branch more stable.
 * Continous integration to keep the master branch more stable.
-* When you add support for other languages, adding languages that are already supported will be ignored. This means you can just specify all the file extensions you want to generate tags for without worrying about whether there is already built in support for them or not.
 * Define your project structure for an even better tags experience. This will also make this plugin work independently of git so you can use it with our without git or with other version control systems.
 
 **Versions**
