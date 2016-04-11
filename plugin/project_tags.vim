@@ -21,7 +21,7 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	let l:project_root_dir= s:FindProjectRoot()
+	let l:project_root_dir= s:FindProjectRoot(l_buf#current().dir())
 	if l:project_root_dir == l#null()
 		echo 'No project root found. Not generating tags'
 		return
@@ -41,13 +41,7 @@ function! s:GenerateTags(file_extension)
 	echo 'out: '.l:out
 endfunction
 
-function! s:FindProjectRoot()
-	let l:buffer_dir= l_buf#current().dir()
-	echo 'buffer dir path: '.l:buffer_dir.path
-	return s:FindProjectRootRecursive(l:buffer_dir)
-endfunction
-
-function! s:FindProjectRootRecursive(dir)
+function! s:FindProjectRoot(dir)
 	" the following commented out line is from when I started rewriting this function to use a project file instead of the .git directory
 	" let filepath= findfile('project_tags.project.vim', a:dir.path.';')
 	echo 'recursive dir path '.a:dir.path
@@ -64,7 +58,7 @@ function! s:FindProjectRootRecursive(dir)
 		echo 'no parent dir.'
 		return ''
 	endif
-	return s:FindProjectRootRecursive(l:parent_dir)
+	return s:FindProjectRoot(l:parent_dir)
 endfunction
 
 call project_tags#add_extension('php')
