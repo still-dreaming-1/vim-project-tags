@@ -21,8 +21,8 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	let l:project_root_dir= s:FindProjectRoot(l_buf#current().dir())
-	if l:project_root_dir == l#null()
+	let l:project_root_dir= s:FindProjectRoot(Current_buf().dir())
+	if l:project_root_dir == Null()
 		echo 'No project root found. Not generating tags'
 		return
 	endif
@@ -46,7 +46,7 @@ function! s:FindProjectRoot(dir)
 	" let filepath= findfile('project_tags.project.vim', a:dir.path.';')
 	echo 'recursive dir path '.a:dir.path
 	echo 'recursive dir path length: '.len(a:dir.path)
-	let l:git_dir= l_dir#new(a:dir.path.'/.git')
+	let l:git_dir= Dir(a:dir.path.'/.git')
 	if l:git_dir.exists
 		echo 'found git dir: '.l:git_dir.path
 		return a:dir
@@ -54,7 +54,7 @@ function! s:FindProjectRoot(dir)
 	echo 'failed git path: '.l:git_dir.path
 	echo 'failed git path length: '.len(l:git_dir.path)
 	let l:parent_dir= a:dir.parent()
-	if l:parent_dir == l#null()
+	if l:parent_dir == Null()
 		echo 'no parent dir.'
 		return ''
 	endif
