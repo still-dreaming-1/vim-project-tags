@@ -28,7 +28,8 @@ function! s:Test_when_there_is_no_proj_root()
 endfunction
 
 function! s:Test_when_parent_is_proj_root()
-	let dir= { 'get_contained_dir' : function('s:get_non_existent_dir_stub') }
+	let dir= {}
+	let dir.get_contained_dir= function('s:get_non_existent_dir_stub')
 	function! dir.parent()
 		let parent= { 'get_contained_dir' : function('s:get_existing_dir_stub') }
 		return parent
