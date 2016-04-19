@@ -38,3 +38,19 @@ function! s:Test_when_parent_is_proj_root()
 	let root= project_tags#FindProjectRoot(dir)
 	AssertEquals(dir.parent(), root)
 endfunction
+
+function! s:Test_when_grandparent_is_proj_root()
+	let dir= {}
+	let dir.get_contained_dir= function('s:get_non_existent_dir_stub')
+	function! dir.parent()
+		let parent= { 'get_contained_dir' : function('s:get_non_existent_dir_stub') }
+		function! parent.parent()
+			let grandparent= { 'get_contained_dir' : function('s:get_existing_dir_stub') }
+			return grandparent
+		endfunction
+		return parent
+	endfunction
+
+	let root= project_tags#FindProjectRoot(dir)
+	AssertEquals(dir.parent().parent(), root)
+endfunction
