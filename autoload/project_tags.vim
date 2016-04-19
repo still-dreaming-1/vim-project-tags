@@ -14,7 +14,7 @@ function! project_tags#FindProjectRoot(dir)
 	endif
 	let l:parent_dir= a:dir.parent()
 	if l:parent_dir == Null()
-		return ''
+		return Null()
 	endif
 	return project_tags#FindProjectRoot(l:parent_dir)
 endfunction
