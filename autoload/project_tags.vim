@@ -6,7 +6,7 @@ function! project_tags#add_extension(file_extension)
 endfunction
 
 function! project_tags#FindProjectRoot(dir)
-	let proj_conf_file= a:dir.get_contained_file('.vim-tags.proj')
+	let proj_conf_file= a:dir.get_contained_file('.project_tags.config.vim')
 	if proj_conf_file.readable
 		return a:dir
 	endif
