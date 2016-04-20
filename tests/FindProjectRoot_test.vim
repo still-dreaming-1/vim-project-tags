@@ -1,16 +1,16 @@
 UTSuite FindProjectRoot
 
-function! s:get_non_existent_dir_stub(name)
-	return { 'exists' : 0}
+function! s:get_not_readable_stub(name)
+	return { 'readable' : 0 }
 endfunction
 
-function! s:get_existing_dir_stub(name)
-	return { 'exists' : 1}
+function! s:get_readable_stub(name)
+	return { 'readable' : 1 }
 endfunction
 
 function! s:Test_when_param_is_proj_root()
 	let dir= {}
-	let dir.get_contained_dir= function("s:get_existing_dir_stub")
+	let dir.get_contained_file= function("s:get_readable_stub")
 
 	let root= project_tags#FindProjectRoot(dir)
 	AssertEquals(root, dir)
@@ -18,7 +18,7 @@ endfunction
 
 function! s:Test_when_there_is_no_proj_root()
 	let dir= {}
-	let dir.get_contained_dir= function("s:get_non_existent_dir_stub")
+	let dir.get_contained_file= function("s:get_not_readable_stub")
 	function! dir.parent()
 		return Null()
 	endfunction
@@ -29,9 +29,9 @@ endfunction
 
 function! s:Test_when_parent_is_proj_root()
 	let dir= {}
-	let dir.get_contained_dir= function('s:get_non_existent_dir_stub')
+	let dir.get_contained_file= function('s:get_not_readable_stub')
 	function! dir.parent()
-		let parent= { 'get_contained_dir' : function('s:get_existing_dir_stub') }
+		let parent= { 'get_contained_file' : function('s:get_readable_stub') }
 		return parent
 	endfunction
 
@@ -41,11 +41,11 @@ endfunction
 
 function! s:Test_when_grandparent_is_proj_root()
 	let dir= {}
-	let dir.get_contained_dir= function('s:get_non_existent_dir_stub')
+	let dir.get_contained_file= function('s:get_not_readable_stub')
 	function! dir.parent()
-		let parent= { 'get_contained_dir' : function('s:get_non_existent_dir_stub') }
+		let parent= { 'get_contained_file' : function('s:get_not_readable_stub') }
 		function! parent.parent()
-			let grandparent= { 'get_contained_dir' : function('s:get_existing_dir_stub') }
+			let grandparent= { 'get_contained_file' : function('s:get_readable_stub') }
 			return grandparent
 		endfunction
 		return parent

@@ -6,10 +6,8 @@ function! project_tags#add_extension(file_extension)
 endfunction
 
 function! project_tags#FindProjectRoot(dir)
-	" the following commented out line is from when I started rewriting this function to use a project file instead of the .git directory
-	" let filepath= findfile('project_tags.project.vim', a:dir.path.';')
-	let l:git_dir= a:dir.get_contained_dir('.git')
-	if l:git_dir.exists
+	let l:proj_conf_file= a:dir.get_contained_file('.vim-tags.proj')
+	if l:proj_conf_file.readable
 		return a:dir
 	endif
 	let l:parent_dir= a:dir.parent()
