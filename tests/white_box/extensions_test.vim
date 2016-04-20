@@ -1,4 +1,4 @@
-UTSuite project_tags
+UTSuite extensions
 
 function! s:Test_supports_more_than_1_file_extension()
 	Assert g:project_tags_extension_ls.len() > 1
