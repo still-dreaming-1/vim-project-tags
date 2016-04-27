@@ -7,7 +7,7 @@ endfunction
 
 function! project_tags#FindProjectRoot(dir)
 	let proj_conf_file= a:dir.get_contained_file('.project_tags.config.vim')
-	if proj_conf_file.readable
+	if proj_conf_file.readable()
 		return a:dir
 	endif
 	let parent_dir= a:dir.parent()

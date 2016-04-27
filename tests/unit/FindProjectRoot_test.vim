@@ -1,11 +1,19 @@
 UTSuite FindProjectRoot
 
 function! s:get_not_readable_stub(name)
-	return { 'readable' : 0 }
+	let stub= {}
+	function! stub.readable()
+		return 0
+	endfunction
+	return stub
 endfunction
 
 function! s:get_readable_stub(name)
-	return { 'readable' : 1 }
+	let stub= {}
+	function! stub.readable()
+		return 1
+	endfunction
+	return stub
 endfunction
 
 function! s:Test_when_param_is_proj_root()
