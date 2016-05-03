@@ -51,3 +51,6 @@ augroup <SID>mapping_group
 		execute 'autocmd bufwritepost *.'.s:extension.' silent call s:GenerateTags("'.s:extension.'")'
 	endfor
 augroup END
+
+let s:current_script_path= expand('<sfile>')
+let g:project_tags_dir_path= Dir(s:current_script_path).parent().parent().path
