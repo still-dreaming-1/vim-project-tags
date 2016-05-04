@@ -1,8 +1,9 @@
-UTSuite when saving txt file
+UTSuite when project file exists and saving txt file
 
 function! s:setup_script_vars()
 	let s:data_dir= Dir(g:project_tags_dir_path.'/tests/data')
 	let s:txt_file= s:data_dir.get_contained_file('text fl.txt')
+	let s:project_file= s:data_dir.get_contained_file('.project_tags.config.vim')
 endfunction
 
 function! s:Setup()
@@ -15,6 +16,10 @@ function! s:Setup()
 	call s:txt_file.create()
 	Assert s:txt_file.readable()
 	Assert s:txt_file.writable()
+	Assert !s:project_file.readable()
+	call s:project_file.create()
+	Assert s:project_file.readable()
+	Assert s:project_file.writable()
 	call s:txt_file.edit()
 	w
 endfunction
@@ -38,8 +43,9 @@ function! s:Test_not_create_tags_file()
 	Assert !txttags_file.readable()
 endfunction
 
-function! s:Test_only_file_is_original_txt_file()
+function! s:Test_only_files_are_original_txt_and_proj_files()
 	let files= s:data_dir.get_all_files()
-	AssertEquals(1, len(files))
-	AssertEquals(s:txt_file.path, files[0].path)
+	AssertEquals(2, len(files))
+	Assert s:txt_file.path ==# files[0].path || s:txt_file.path ==# files[1].path
+	Assert s:project_file.path ==# files[0].path || s:project_file.path ==# files[1].path
 endfunction
