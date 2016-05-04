@@ -1,0 +1,3 @@
+<?
+class valid_file {
+}
