@@ -1,0 +1,3 @@
+<?
+class another_class {
+}
