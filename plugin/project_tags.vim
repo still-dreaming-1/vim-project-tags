@@ -21,24 +21,24 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	let l:project_root_dir= project_tags#find_project_root(Current_buf().dir())
-	if l:project_root_dir == Null()
+	let project_root_dir= project_tags#find_project_root(Current_buf().dir())
+	if project_root_dir == Null()
 		echo 'No project root found. Not generating tags'
 		return
 	endif
-	let l:tags_filename= a:file_extension.'tags'
-	let l:tags_filepath= l:project_root_dir.path.'/'.l:tags_filename
-	let l:rm_out= system('rm -f "'.l:tags_filepath.'"')
-	echo 'rm out: '.l:rm_out
+	let tags_filename= a:file_extension.'tags'
+	let tags_filepath= project_root_dir.path.'/'.tags_filename
+	let rm_out= system('rm -f "'.tags_filepath.'"')
+	echo 'rm out: '.rm_out
 	if exists('g:project_tags_ctags_path')
-		let l:ctags= g:project_tags_ctags_path
+		let ctags= g:project_tags_ctags_path
 	else
-		let l:ctags= 'ctags'
+		let ctags= 'ctags'
 	endif
-	let l:project_config= project_tags#get_immediate_project_file(l:project_root_dir)
+	let project_config= project_tags#get_immediate_project_file(project_root_dir)
 	let g:project_tags_exclude= []
-	call l:project_config.source()
-	let file_list= l:project_root_dir.get_files_with_extension_recursive(a:file_extension)
+	call project_config.source()
+	let file_list= project_root_dir.get_files_with_extension_recursive(a:file_extension)
 	let tags_file= project_tags.tags_file#new(a:file_extension)
 	call tags_file.regenerate_empty()
 	for file in file_list
@@ -49,10 +49,10 @@ function! s:GenerateTags(file_extension)
 			endif
 		endfor
 	endfor
-	" let l:command= "find '".l:project_root_dir.path."' -name '*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
-	echo 'command: '.l:command
-	let l:out= system(l:command)
-	echo 'out: '.l:out
+	" let command= "find '".project_root_dir.path."' -name '*".a:file_extension."' -exec ".ctags." --append=yes -f '".tags_filepath."' {} +"
+	echo 'command: '.command
+	let out= system(command)
+	echo 'out: '.out
 endfunction
 
 call project_tags#add_extension('php')

@@ -14,7 +14,7 @@ function! project_tags#find_project_root(dir)
 	if parent_dir == Null()
 		return Null()
 	endif
-	return project_tags#find_project_root(l:parent_dir)
+	return project_tags#find_project_root(parent_dir)
 endfunction
 
 function! project_tags#get_immediate_project_file(dir)
