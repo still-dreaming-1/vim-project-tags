@@ -35,7 +35,7 @@ function! s:GenerateTags(file_extension)
 	else
 		let l:ctags= 'ctags'
 	endif
-	let l:project_config= project_tags#find_project_root(l:project_root_dir)
+	let l:project_config= project_tags#get_immediate_project_file(l:project_root_dir)
 	let g:project_tags_exclude= []
 	call l:project_config.source()
 	let file_list= l:project_root_dir.get_files_with_extension_recursive(a:file_extension)
