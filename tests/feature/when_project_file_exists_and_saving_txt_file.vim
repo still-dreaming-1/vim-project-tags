@@ -43,7 +43,7 @@ function! s:Test_not_create_tags_file()
 	Assert !txttags_file.readable()
 endfunction
 
-function! s:Test_only_files_are_original_txt_and_proj_files()
+function! s:Test_only_files_are_original_txt_and_project_files()
 	let files= s:data_dir.get_all_files()
 	AssertEquals(2, len(files))
 	Assert s:txt_file.path ==# files[0].path || s:txt_file.path ==# files[1].path

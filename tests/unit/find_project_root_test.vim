@@ -1,4 +1,4 @@
-UTSuite FindProjectRoot
+UTSuite find_project_root
 
 function! s:get_not_readable_stub(name)
 	let stub= {}
@@ -16,26 +16,26 @@ function! s:get_readable_stub(name)
 	return stub
 endfunction
 
-function! s:Test_when_param_is_proj_root()
+function! s:Test_when_param_is_project_root()
 	let dir= {}
 	let dir.get_contained_file= function("s:get_readable_stub")
 
-	let root= project_tags#FindProjectRoot(dir)
+	let root= project_tags#find_project_root(dir)
 	AssertEquals(root, dir)
 endfunction
 
-function! s:Test_when_there_is_no_proj_root()
+function! s:Test_when_there_is_no_project_root()
 	let dir= {}
 	let dir.get_contained_file= function("s:get_not_readable_stub")
 	function! dir.parent()
 		return Null()
 	endfunction
 
-	let root= project_tags#FindProjectRoot(dir)
+	let root= project_tags#find_project_root(dir)
 	AssertEquals(Null(), root)
 endfunction
 
-function! s:Test_when_parent_is_proj_root()
+function! s:Test_when_parent_is_project_root()
 	let dir= {}
 	let dir.get_contained_file= function('s:get_not_readable_stub')
 	function! dir.parent()
@@ -43,11 +43,11 @@ function! s:Test_when_parent_is_proj_root()
 		return parent
 	endfunction
 
-	let root= project_tags#FindProjectRoot(dir)
+	let root= project_tags#find_project_root(dir)
 	AssertEquals(dir.parent(), root)
 endfunction
 
-function! s:Test_when_grandparent_is_proj_root()
+function! s:Test_when_grandparent_is_project_root()
 	let dir= {}
 	let dir.get_contained_file= function('s:get_not_readable_stub')
 	function! dir.parent()
@@ -59,6 +59,6 @@ function! s:Test_when_grandparent_is_proj_root()
 		return parent
 	endfunction
 
-	let root= project_tags#FindProjectRoot(dir)
+	let root= project_tags#find_project_root(dir)
 	AssertEquals(dir.parent().parent(), root)
 endfunction

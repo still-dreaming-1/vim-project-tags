@@ -8,6 +8,7 @@ function! s:setup_script_vars()
 	let s:php_file= s:data_dir.get_contained_file('supported_file.php')
 	let s:another_static_php_file= s:static_data_dir.get_contained_file('another_class.php')
 	let s:another_php_file= s:exclude_dir.get_contained_file('another_class.php')
+	let s:static_exclude_project_file= s:static_data_dir.get_contained_file('exclude_dir_project.vim')
 	let s:project_file= s:data_dir.get_contained_file('.project_tags.config.vim')
 	let s:phptags_file= s:data_dir.get_contained_file('phptags')
 endfunction
@@ -24,8 +25,9 @@ function! s:Setup()
 	call s:static_php_file.copy_to(s:php_file.path)
 	Assert s:php_file.readable()
 	Assert s:php_file.writable()
+	Assert s:static_exclude_project_file.readable()
 	Assert !s:project_file.readable()
-	call s:project_file.create()
+	call s:static_exclude_project_file.copy_to(s:project_file.path)
 	Assert s:project_file.readable()
 	Assert s:project_file.writable()
 	Assert !s:exclude_dir.exists()
@@ -61,5 +63,8 @@ function! s:Test_only_3_files_in_data_dir()
 endfunction
 
 function! s:Test_tags_file_does_not_contain_tags_from_excluded_dir()
-	Assert 0
+	call s:phptags_file.edit()
+	normal! gg
+	let line_num= search('another_class')
+	AssertEquals(0, line_num)
 endfunction

@@ -21,11 +21,14 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	let l:project_root_dir= project_tags#FindProjectRoot(Current_buf().dir())
+	let l:project_root_dir= project_tags#find_project_root(Current_buf().dir())
 	if l:project_root_dir == Null()
 		echo 'No project root found. Not generating tags'
 		return
 	endif
+	let l:project_config= project_tags#find_project_root(l:project_root_dir)
+	let g:project_tags_exclude= []
+	let l:project_config.source()
 	let l:tags_filename= a:file_extension.'tags'
 	let l:tags_filepath= l:project_root_dir.path.'/'.l:tags_filename
 	let l:rm_out= system('rm -f "'.l:tags_filepath.'"')
@@ -35,7 +38,18 @@ function! s:GenerateTags(file_extension)
 	else
 		let l:ctags= 'ctags'
 	endif
-	let l:command= "find '".l:project_root_dir.path."' -name '*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
+	let file_list= l:project_root_dir.get_files_with_extension_recursive(a:file_extension)
+	let tags_file= project_tags.tags_file#new(a:file_extension)
+	call tags_file.regenerate_empty()
+	for file in file_list
+		for exclude_dir_path in g:project_tags_exclude
+			let exclude_dir= Dir(exclude_dir_path)
+			if !exclude_dir.contains_file_recursive(file.path)
+				tags_file.append_from(file.path)
+			endif
+		endfor
+	endfor
+	" let l:command= "find '".l:project_root_dir.path."' -name '*".a:file_extension."' -exec ".l:ctags." --append=yes -f '".l:tags_filepath."' {} +"
 	echo 'command: '.l:command
 	let l:out= system(l:command)
 	echo 'out: '.l:out

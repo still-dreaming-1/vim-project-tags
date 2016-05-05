@@ -1,3 +1,3 @@
 <?
-class valid_file {
+class supported_file {
 }
