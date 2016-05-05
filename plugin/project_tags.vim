@@ -45,7 +45,7 @@ function! s:GenerateTags(file_extension)
 		for exclude_dir_path in g:project_tags_exclude
 			let exclude_dir= Dir(exclude_dir_path)
 			if !exclude_dir.contains_file_recursive(file.path)
-				tags_file.append_from(file.path)
+				call tags_file.append_from(file.path)
 			endif
 		endfor
 	endfor
