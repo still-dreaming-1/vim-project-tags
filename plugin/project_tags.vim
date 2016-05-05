@@ -37,7 +37,7 @@ function! s:GenerateTags(file_extension)
 	endif
 	let l:project_config= project_tags#find_project_root(l:project_root_dir)
 	let g:project_tags_exclude= []
-	let l:project_config.source()
+	call l:project_config.source()
 	let file_list= l:project_root_dir.get_files_with_extension_recursive(a:file_extension)
 	let tags_file= project_tags.tags_file#new(a:file_extension)
 	call tags_file.regenerate_empty()
