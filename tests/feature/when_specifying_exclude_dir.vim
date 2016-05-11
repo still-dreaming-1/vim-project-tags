@@ -36,6 +36,7 @@ function! s:Setup()
 	Assert s:another_static_php_file.readable()
 	call s:another_static_php_file.copy_to(s:another_php_file.path)
 	call s:php_file.edit()
+	Assert !s:phptags_file.readable()
 	let g:project_tags_exclude= []
 	AssertEquals(0, len(g:project_tags_exclude))
 	w
