@@ -36,6 +36,8 @@ function! s:Setup()
 	Assert s:another_static_php_file.readable()
 	call s:another_static_php_file.copy_to(s:another_php_file.path)
 	call s:php_file.edit()
+	let g:project_tags_exclude= []
+	AssertEquals(0, len(g:project_tags_exclude))
 	w
 endfunction
 
@@ -51,6 +53,11 @@ function! s:Teardown()
 	Assert s:data_dir.exists()
 	call s:data_dir.delete()
 	Assert !s:data_dir.exists()
+endfunction
+
+function! s:Test_accepted_project_file_exclude_setting()
+	AssertEquals(1, len(g:project_tags_exclude))
+	AssertEquals('exclude dir', g:project_tags_exclude[0])
 endfunction
 
 function! s:Test_created_tags_file()
