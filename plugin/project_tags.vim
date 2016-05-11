@@ -53,8 +53,6 @@ function! s:GenerateTags(file_extension)
 			call tags_file.append_from(file.path)
 		endif
 	endfor
-	" let command= "find '".project_root_dir.path."' -name '*".a:file_extension."' -exec ".ctags." --append=yes -f '".tags_filepath."' {} +"
-	" let out= system(command)
 endfunction
 
 call project_tags#add_extension('php')
