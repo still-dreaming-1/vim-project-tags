@@ -42,12 +42,16 @@ function! s:GenerateTags(file_extension)
 	let tags_file= project_tags_tags_file#new(project_root_dir, a:file_extension)
 	call tags_file.regenerate_empty()
 	for file in file_list
+		let include_file= 1
 		for exclude_dir_path in g:project_tags_exclude
 			let exclude_dir= Dir(exclude_dir_path)
-			if !exclude_dir.contains_file_recursive(file.path)
-				call tags_file.append_from(file.path)
+			if exclude_dir.contains_file_recursive(file.path)
+				let include_file= 0
 			endif
 		endfor
+		if include_file
+			call tags_file.append_from(file.path)
+		endif
 	endfor
 	" let command= "find '".project_root_dir.path."' -name '*".a:file_extension."' -exec ".ctags." --append=yes -f '".tags_filepath."' {} +"
 	" let out= system(command)
