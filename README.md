@@ -26,11 +26,11 @@ Use the latest commit on the master branch. The master branch is the stable bran
 
 **Configuration**
 
-You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you wish to use this plugin with. The generated tags files will appear inside the same directory as your project configuration file.
+You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you wish to use this plugin with. Be careful what you place in this file, as it will be sourced and ran as VimL code inside your Vim. The generated tags files will appear inside the same directory as your project configuration file.
 
 Exclude directory option:
 
-Inside the project configuration file, you have the option of excluding directories that you don't want to create tags from. Here is an example:
+Inside the project configuration file, you have the option of excluding directories that you don't want to create tags from. Be careful what you place in this file, as it will be sourced and ran as VimL code inside your Vim. Here is an example of using the exclude directory option:
 `let g:project_tags_exclude= ['mobile', 'generated_code']`
 If you place that line inside your project configuration file, your tags files will not contain tag data from source files inside any subdirectories named "mobile" or "generated_code". The excluded directories will be treated as relative paths from the project file. This may be a useful feature if you frequently find yourself matching false positives when trying to do a code lookup based on tags and the false positives are all inside a specific directory. There is a very specific use case where this feature will be very useful after the include directory option is developed.
 
