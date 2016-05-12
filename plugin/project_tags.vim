@@ -30,16 +30,14 @@ function! s:GenerateTags(file_extension)
 	let tags_filepath= project_root_dir.path.'/'.tags_filename
 	let rm_out= system('rm -f "'.tags_filepath.'"')
 	echo 'rm out: '.rm_out
-	if exists('g:project_tags_ctags_path')
-		let ctags= g:project_tags_ctags_path
-	else
-		let ctags= 'ctags'
-	endif
 	let project_config= project_tags#get_immediate_project_file(project_root_dir)
 	let g:project_tags_exclude= []
 	call project_config.source()
 	let file_list= project_root_dir.get_files_with_extension_recursive(a:file_extension)
 	let tags_file= project_tags_tags_file#new(project_root_dir, a:file_extension)
+	if exists('g:project_tags_ctags_path')
+		let tags_file.ctags_path= g:project_tags_ctags_path
+	endif
 	call tags_file.regenerate_empty()
 	for file in file_list
 		let include_file= 1
