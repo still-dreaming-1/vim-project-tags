@@ -15,7 +15,7 @@ You can also provide a custom executable name or full path to to your ctags, but
 
 **Installation**
 
-Install it the normal way you install Vim plugins. This also depends on the [vim-elhiv](https://github.com/still-dreaming-1/vim-elhiv/tree/master) plugin, so you will have to install that as well. You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you whish to use this plugin with.
+Install it the normal way you install Vim plugins. This also depends on the [vim-elhiv](https://github.com/still-dreaming-1/vim-elhiv/tree/master) plugin, so you will have to install that as well. You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you wish to use this plugin with.
 
 **Coming soon**
 * More options to define your project structure inside your project configuration files for an even better tags experience.
@@ -26,7 +26,7 @@ Use the latest commit on the master branch. The master branch is the stable bran
 
 **Configuration**
 
-You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you whish to use this plugin with. The generated tags files will appear inside the same directory as your project configuration file.
+You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you wish to use this plugin with. The generated tags files will appear inside the same directory as your project configuration file.
 
 Exclude directory option:
 
