@@ -6,6 +6,8 @@ function! s:setup_script_vars()
 endfunction
 
 function! s:Setup()
+	let s:stopwatch= Stopwatch()
+	call s:stopwatch.start()
 	call s:safe_teardown()
 	call s:setup_script_vars()
 	Assert !s:data_dir.exists()
@@ -31,6 +33,8 @@ function! s:Teardown()
 	Assert s:data_dir.exists()
 	call s:data_dir.delete()
 	Assert !s:data_dir.exists()
+	let elapsed_milliseconds= s:stopwatch.stop()
+	Assert elapsed_milliseconds < 1000
 endfunction
 
 function! s:Test_not_create_tags_file()
