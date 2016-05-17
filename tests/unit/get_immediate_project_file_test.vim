@@ -1,5 +1,15 @@
 UTSuite get_immediate_project_file
 
+function! s:Setup()
+	let s:stopwatch= Stopwatch()
+	call s:stopwatch.start()
+endfunction
+
+function! s:Teardown()
+	let elapsed_milliseconds= s:stopwatch.stop()
+	Assert elapsed_milliseconds < 1000
+endfunction
+
 function! s:get_not_readable_stub(name)
 	let stub= {}
 	let stub.path= 'non readable file'
