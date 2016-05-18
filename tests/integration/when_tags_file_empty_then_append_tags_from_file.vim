@@ -27,7 +27,7 @@ function! s:Setup()
 	AssertEquals(0, s:tags_file.size())
 	Assert s:static_php_file.readable()
 	Assert s:static_php_file.size() > 0
-	call s:tags_file.append_from(s:static_php_file.path)
+	call s:tags_file.append_from_all([s:static_php_file.path])
 endfunction
 
 function! s:Teardown()

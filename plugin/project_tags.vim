@@ -39,6 +39,7 @@ function! s:GenerateTags(file_extension)
 		let tags_file.ctags_path= g:project_tags_ctags_path
 	endif
 	call tags_file.regenerate_empty()
+	let non_excluded_file_path_list= []
 	for file in file_list
 		let include_file= 1
 		for exclude_dir_relative_path in g:project_tags_exclude
@@ -48,9 +49,10 @@ function! s:GenerateTags(file_extension)
 			endif
 		endfor
 		if include_file
-			call tags_file.append_from(file.path)
+			call add(non_excluded_file_path_list, file.path)
 		endif
 	endfor
+	call tags_file.append_from_all(non_excluded_file_path_list)
 endfunction
 
 call project_tags#add_extension('php')

@@ -11,8 +11,11 @@ function! project_tags_tags_file#new(dir, file_extension)
 		call file.create()
 	endfunction
 
-	function! tags_file.append_from(code_file_path)
-		let command= self.ctags_path." --append=yes -f ".shellescape(self.path)." ".shellescape(a:code_file_path)
+	function! tags_file.append_from_all(code_file_path_list)
+		let command= self.ctags_path." --append=yes -f ".shellescape(self.path)
+		for file_path in a:code_file_path_list
+			let command= command." ".shellescape(file_path)
+		endfor
 		call Shell().run(command)
 	endfunction
 
