@@ -40,15 +40,31 @@ function! s:GenerateTags(file_extension)
 	endif
 	call tags_file.regenerate_empty()
 	let non_excluded_file_path_list= []
+	" for file in file_list
+	" 	let include_file= 1
+	" 	for exclude_dir_relative_path in g:project_tags_exclude
+	" 		let exclude_dir= project_root_dir.get_contained_dir(exclude_dir_relative_path)
+	" 		if S(file.path).starts_with(exclude_dir.path.'/')
+	" 			let include_file= 0
+	" 		endif
+	" 	endfor
+	" 	if include_file
+	" 		call add(non_excluded_file_path_list, file.path)
+	" 	endif
+	" endfor
 	for file in file_list
-		let include_file= 1
-		for exclude_dir_relative_path in g:project_tags_exclude
-			let exclude_dir= project_root_dir.get_contained_dir(exclude_dir_relative_path)
-			if S(file.path).starts_with(exclude_dir.path.'/')
-				let include_file= 0
+		let file.exclude= 0
+	endfor
+	for exclude_dir_relative_path in g:project_tags_exclude
+		let exclude_dir_full_path= project_root_dir.get_contained_dir(exclude_dir_relative_path).path.'/'
+		for file in file_list
+			if file.exclude == 0 && S(file.path).starts_with(exclude_dir_full_path)
+				let file.exclude= 1
 			endif
 		endfor
-		if include_file
+	endfor
+	for file in file_list
+		if !file.exclude
 			call add(non_excluded_file_path_list, file.path)
 		endif
 	endfor
