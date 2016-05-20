@@ -44,7 +44,7 @@ function! s:GenerateTags(file_extension)
 		let include_file= 1
 		for exclude_dir_relative_path in g:project_tags_exclude
 			let exclude_dir= project_root_dir.get_contained_dir(exclude_dir_relative_path)
-			if exclude_dir.contains_file_path_recursive(file.path)
+			if S(file.path).starts_with(exclude_dir.path.'/')
 				let include_file= 0
 			endif
 		endfor
