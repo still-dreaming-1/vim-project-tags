@@ -26,6 +26,8 @@ function! s:Setup()
 	Assert s:project_file.readable()
 	Assert s:project_file.writable()
 	call s:php_file.edit()
+	Assert !s:phptags_file.readable()
+	Assert !s:phptags_file.writable()
 	w
 endfunction
 
@@ -55,4 +57,8 @@ function! s:Test_only_files_are_copied_php_file_and_project_file_and_tags_file()
 	Assert s:php_file.path ==# files[0].path || s:php_file.path ==# files[1].path || s:php_file.path ==# files[2].path
 	Assert s:project_file.path ==# files[0].path || s:project_file.path ==# files[1].path || s:project_file.path ==# files[2].path
 	Assert s:phptags_file.path ==# files[0].path || s:phptags_file.path ==# files[1].path || s:phptags_file.path ==# files[2].path
+endfunction
+
+function! s:Test_tags_file_not_empty()
+	Assert s:phptags_file.size() > 0
 endfunction
