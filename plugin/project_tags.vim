@@ -21,6 +21,7 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
+	echo 'starting GenerateTags'
 	let project_root_dir= project_tags#find_project_root(Current_buf().dir())
 	if project_root_dir == Null()
 		echo 'No project root found. Not generating tags'
@@ -33,30 +34,11 @@ function! s:GenerateTags(file_extension)
 	let project_config= project_tags#get_immediate_project_file(project_root_dir)
 	let g:project_tags_exclude= []
 	call project_config.source()
-	let file_list= project_root_dir.get_files_with_extension_recursive(a:file_extension)
 	let tags_file= project_tags_tags_file#new(project_root_dir, a:file_extension)
 	if exists('g:project_tags_ctags_path')
 		let tags_file.ctags_path= g:project_tags_ctags_path
 	endif
-	call tags_file.regenerate_empty()
-	let non_excluded_file_path_list= []
-	for file in file_list
-		let file.exclude= 0
-	endfor
-	for exclude_dir_relative_path in g:project_tags_exclude
-		let exclude_dir_full_path= project_root_dir.get_contained_dir(exclude_dir_relative_path).path.'/'
-		for file in file_list
-			if file.exclude == 0 && S(file.path).starts_with(exclude_dir_full_path)
-				let file.exclude= 1
-			endif
-		endfor
-	endfor
-	for file in file_list
-		if !file.exclude
-			call add(non_excluded_file_path_list, file.path)
-		endif
-	endfor
-	call tags_file.append_from_all(non_excluded_file_path_list)
+	call tags_file.regenerate_excluding(g:project_tags_exclude)
 endfunction
 
 call project_tags#add_extension('php')
