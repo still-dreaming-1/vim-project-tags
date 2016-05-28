@@ -69,6 +69,7 @@ endfunction
 
 function! s:Test_created_tags_file()
 	Assert s:phptags_file.readable()
+	Assert s:phptags_file.writable()
 endfunction
 
 function! s:Test_only_3_files_in_data_dir()
