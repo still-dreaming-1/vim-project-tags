@@ -23,11 +23,10 @@ function! project_tags_tags_file#new(dir, file_extension)
 			let grep_exclude_str= grep_exclude_str." -ve '^".path."'"
 		endfor
 		if len(grep_exclude_str) > 0
-			grep_exclude_str= 'grep'.grep_exclude_str.' | '
+			let grep_exclude_str= 'grep'.grep_exclude_str.' | '
 		endif
 		let command= 'find '.shellescape(self.dir.path).' -type f -name '.extension_search_str.' | '.grep_exclude_str.'xargs '.self.ctags_path.' --append=yes -f '.shellescape(self.path)
 		call Shell().run(command)
-		return command
 	endfunction
 
 	function! tags_file.append_from_all(code_file_path_list)
