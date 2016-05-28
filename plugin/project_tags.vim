@@ -38,7 +38,9 @@ function! s:GenerateTags(file_extension)
 	if exists('g:project_tags_ctags_path')
 		let tags_file.ctags_path= g:project_tags_ctags_path
 	endif
+	call Log('before regenerate tags')
 	call tags_file.regenerate_excluding(g:project_tags_exclude)
+	call Log('after regenerate tags')
 endfunction
 
 call project_tags#add_extension('php')
