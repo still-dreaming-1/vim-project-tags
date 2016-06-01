@@ -21,10 +21,10 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	echo 'starting GenerateTags'
+	call Log('starting GenerateTags')
 	let project_root_dir= project_tags#find_project_root(Current_buf().dir())
 	if project_root_dir == Null()
-		echo 'No project root found. Not generating tags'
+		call Log('No project root found. Not generating tags')
 		return
 	endif
 	let tags_filename= a:file_extension.'tags'
