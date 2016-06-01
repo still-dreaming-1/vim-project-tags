@@ -30,7 +30,6 @@ function! s:GenerateTags(file_extension)
 	let tags_filename= a:file_extension.'tags'
 	let tags_filepath= project_root_dir.path.'/'.tags_filename
 	let rm_out= system('rm -f "'.tags_filepath.'"')
-	echo 'rm out: '.rm_out
 	let project_config= project_tags#get_immediate_project_file(project_root_dir)
 	let g:project_tags_exclude= []
 	call project_config.source()
