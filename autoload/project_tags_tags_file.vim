@@ -25,7 +25,9 @@ function! project_tags_tags_file#new(dir, file_extension)
 		if len(grep_exclude_str) > 0
 			let grep_exclude_str= 'grep'.grep_exclude_str.' | '
 		endif
-		let command= 'find '.shellescape(self.dir.path).' -type f -name '.extension_search_str.' | '.grep_exclude_str.'xargs '.self.ctags_path.' --append=yes -f '.shellescape(self.path)
+		let command=
+			\ 'find '.shellescape(self.dir.path).' -type f -name '.extension_search_str
+			\ .' | '.grep_exclude_str.'xargs -d '."'\n' ".self.ctags_path.' --append=yes -f '.shellescape(self.path)
 		call Shell().run(command)
 	endfunction
 

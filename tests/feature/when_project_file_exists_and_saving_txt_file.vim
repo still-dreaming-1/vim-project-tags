@@ -1,7 +1,7 @@
 UTSuite when project file exists and saving txt file
 
 function! s:setup_script_vars()
-	let s:data_dir= Dir(g:project_tags_dir_path.'/tests/data')
+	let s:data_dir= Dir(g:project_tags_dir_path.'/generated test data')
 	let s:txt_file= s:data_dir.get_contained_file('text fl.txt')
 	let s:project_file= s:data_dir.get_contained_file('.project_tags.config.vim')
 endfunction

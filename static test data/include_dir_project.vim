@@ -1,1 +1,1 @@
-let g:project_tags_include= ['include dir']
+let g:project_tags_include= ['../include dir']

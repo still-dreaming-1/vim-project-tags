@@ -32,6 +32,8 @@ function! s:GenerateTags(file_extension)
 	let rm_out= system('rm -f "'.tags_filepath.'"')
 	let project_config= project_tags#get_immediate_project_file(project_root_dir)
 	let g:project_tags_exclude= []
+	let g:project_tags_include= []
+	call Log('after create project variables before the project file is sourced')
 	call project_config.source()
 	let tags_file= project_tags_tags_file#new(project_root_dir, a:file_extension)
 	if exists('g:project_tags_ctags_path')

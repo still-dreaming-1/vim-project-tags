@@ -1,7 +1,7 @@
 UTSuite when project file exists and saving php file
 
 function! s:setup_script_vars()
-	let s:data_dir= Dir(g:project_tags_dir_path.'/tests/data')
+	let s:data_dir= Dir(g:project_tags_dir_path.'/generated test data')
 	let s:static_php_file= Dir(g:project_tags_dir_path.'/static test data').get_contained_file('supported_file.php')
 	let s:php_file= s:data_dir.get_contained_file('supported_file.php')
 	let s:project_file= s:data_dir.get_contained_file('.project_tags.config.vim')
@@ -61,4 +61,18 @@ endfunction
 
 function! s:Test_tags_file_not_empty()
 	Assert s:phptags_file.size() > 0
+endfunction
+
+function! s:Test_tags_file_only_contains_one_tag()
+	call s:phptags_file.edit()
+	normal! gg
+	let num_lines= line('$')
+	AssertEquals(1, num_lines)
+endfunction
+
+function! s:Test_tags_file_does_contain_tag_from_php_file()
+	call s:phptags_file.edit()
+	normal! gg
+	let line_num= search('supported_file')
+	AssertEquals(1, line_num)
 endfunction
