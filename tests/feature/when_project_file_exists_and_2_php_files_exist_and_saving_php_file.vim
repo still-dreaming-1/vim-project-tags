@@ -1,9 +1,9 @@
 UTSuite when a project file exists and 2 php files exist and saving a php file
 
 function! s:setup_script_vars()
-	let s:data_dir= Dir(g:project_tags_dir_path.'/generated test data')
-	let s:static_php_file= Dir(g:project_tags_dir_path.'/static test data').get_contained_file('supported_file.php')
-	let s:static_another_php_file= Dir(g:project_tags_dir_path.'/static test data').get_contained_file('another_class.php')
+	let s:data_dir= L_dir(g:project_tags_dir_path.'/generated test data')
+	let s:static_php_file= L_dir(g:project_tags_dir_path.'/static test data').get_contained_file('supported_file.php')
+	let s:static_another_php_file= L_dir(g:project_tags_dir_path.'/static test data').get_contained_file('another_class.php')
 	let s:php_file= s:data_dir.get_contained_file('supported_file.php')
 	let s:another_php_file= s:data_dir.get_contained_file('another_class.php')
 	let s:project_file= s:data_dir.get_contained_file('.project_tags.config.vim')

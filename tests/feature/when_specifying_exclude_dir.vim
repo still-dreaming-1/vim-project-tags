@@ -1,8 +1,8 @@
 UTSuite when specifying an exclude dir
 
 function! s:setup_script_vars()
-	let s:data_dir= Dir(g:project_tags_dir_path.'/generated test data')
-	let s:static_data_dir= Dir(g:project_tags_dir_path.'/static test data')
+	let s:data_dir= L_dir(g:project_tags_dir_path.'/generated test data')
+	let s:static_data_dir= L_dir(g:project_tags_dir_path.'/static test data')
 	let s:exclude_dir= s:data_dir.get_contained_dir('exclude dir')
 	let s:static_php_file= s:static_data_dir.get_contained_file('supported_file.php')
 	let s:php_file= s:data_dir.get_contained_file('supported_file.php')

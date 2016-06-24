@@ -1,7 +1,7 @@
 function! project_tags_tags_file#new(dir, file_extension)
 	let tags_file= {}
 	let tags_file.for_extension= a:file_extension
-	let tags_file.dir= Dir(a:dir.path)
+	let tags_file.dir= L_dir(a:dir.path)
 	let tags_file.path= a:dir.get_contained_file(a:file_extension.'tags').path
 	let tags_file.ctags_path= 'ctags'
 

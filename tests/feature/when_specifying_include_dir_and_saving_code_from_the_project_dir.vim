@@ -1,12 +1,12 @@
 UTSuite when specifying an include dir and saving code from the project dir
 
 function! s:setup_script_vars()
-	let s:static_data_dir= Dir(g:project_tags_dir_path.'/static test data')
+	let s:static_data_dir= L_dir(g:project_tags_dir_path.'/static test data')
 		let s:static_php_file= s:static_data_dir.get_contained_file('supported_file.php')
 		let s:static_another_php_file= s:static_data_dir.get_contained_file('another_class.php')
 		let s:static_include_project_file= s:static_data_dir.get_contained_file('include_dir_project.vim')
 
-	let s:data_dir= Dir(g:project_tags_dir_path.'/generated test data')
+	let s:data_dir= L_dir(g:project_tags_dir_path.'/generated test data')
 		let s:include_dir= s:data_dir.get_contained_dir('include dir')
 			let s:another_php_file= s:include_dir.get_contained_file('another_class.php')
 		let s:proj_dir= s:data_dir.get_contained_dir('proj dir')

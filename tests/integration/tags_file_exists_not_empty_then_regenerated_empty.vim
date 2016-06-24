@@ -1,8 +1,8 @@
 UTSuite tags_file integration: Exists not empty, then regenerated empty
 
 function! s:setup_script_vars()
-	let s:data_dir= Dir(g:project_tags_dir_path.'/generated test data')
-	let not_empty_fake_tag_files_dir= Dir(g:project_tags_dir_path.'/static test data/fake tag files/not empty')
+	let s:data_dir= L_dir(g:project_tags_dir_path.'/generated test data')
+	let not_empty_fake_tag_files_dir= L_dir(g:project_tags_dir_path.'/static test data/fake tag files/not empty')
 	let s:static_tags_file= project_tags_tags_file#new(not_empty_fake_tag_files_dir, '.php')
 	let s:tags_file= project_tags_tags_file#new(s:data_dir, '.php')
 endfunction
