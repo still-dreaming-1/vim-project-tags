@@ -6,7 +6,7 @@ function! project_tags_tags_file#new(dir, file_extension)
 	let tags_file.ctags_path= 'ctags'
 
 	function! tags_file.regenerate_empty()
-		let file= File(self.path)
+		let file= L_file(self.path)
 		if self.readable() && self.size() > 0
 			call file.delete()
 		endif
@@ -32,15 +32,15 @@ function! project_tags_tags_file#new(dir, file_extension)
 	endfunction
 
 	function! tags_file.readable()
-		return File(self.path).readable()
+		return L_file(self.path).readable()
 	endfunction
 
 	function! tags_file.writable()
-		return File(self.path).writable()
+		return L_file(self.path).writable()
 	endfunction
 
 	function! tags_file.size()
-		return File(self.path).size()
+		return L_file(self.path).size()
 	endfunction
 
 	return tags_file

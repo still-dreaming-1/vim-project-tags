@@ -25,7 +25,7 @@ function! s:Setup()
 	Assert s:static_tags_file.readable()
 	Assert s:static_tags_file.size() > 0
 	Assert !s:tags_file.readable()
-	call File(s:static_tags_file.path).copy_to(s:tags_file.path)
+	call L_file(s:static_tags_file.path).copy_to(s:tags_file.path)
 	Assert s:tags_file.readable()
 	Assert s:tags_file.size() > 0
 	call s:tags_file.regenerate_empty()
