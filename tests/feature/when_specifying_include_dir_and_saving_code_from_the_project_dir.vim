@@ -46,9 +46,9 @@ function! s:Setup()
 			Assert! !s:phptags_file.readable()
 
 	call s:php_file.edit()
-	call g:l.log('test before save')
+	call l#log('test before save')
 	w
-	call g:l.log('after save')
+	call l#log('after save')
 endfunction
 
 function! s:safe_teardown()
@@ -68,7 +68,7 @@ function! s:Teardown()
 endfunction
 
 function! s:Test_accepted_project_file_include_setting()
-	call g:l.log('test: before check include setting')
+	call l#log('test: before check include setting')
 	AssertEquals(1, len(g:project_tags_include))
 	AssertEquals('../include dir', g:project_tags_include[0])
 endfunction

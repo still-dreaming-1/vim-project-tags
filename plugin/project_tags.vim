@@ -21,10 +21,10 @@
 " sourced just before the variable is used.
 
 function! s:GenerateTags(file_extension)
-	call g:l.log('starting GenerateTags')
+	call l#log('starting GenerateTags')
 	let project_root_dir= project_tags#find_project_root(L_current_buffer().dir())
 	if project_root_dir == L_null()
-		call g:l.log('No project root found. Not generating tags')
+		call l#log('No project root found. Not generating tags')
 		return
 	endif
 	let tags_filename= a:file_extension.'tags'
@@ -33,15 +33,15 @@ function! s:GenerateTags(file_extension)
 	let project_config= project_tags#get_immediate_project_file(project_root_dir)
 	let g:project_tags_exclude= []
 	let g:project_tags_include= []
-	call g:l.log('after create project variables before the project file is sourced')
+	call l#log('after create project variables before the project file is sourced')
 	call project_config.source()
 	let tags_file= project_tags_tags_file#new(project_root_dir, a:file_extension)
 	if exists('g:project_tags_ctags_path')
 		let tags_file.ctags_path= g:project_tags_ctags_path
 	endif
-	call g:l.log('before regenerate tags')
+	call l#log('before regenerate tags')
 	call tags_file.regenerate_excluding(g:project_tags_exclude)
-	call g:l.log('after regenerate tags')
+	call l#log('after regenerate tags')
 endfunction
 
 call project_tags#add_extension('php')
