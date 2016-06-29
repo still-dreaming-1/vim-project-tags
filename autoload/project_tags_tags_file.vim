@@ -25,8 +25,13 @@ function! project_tags_tags_file#new(dir, file_extension)
 		if len(grep_exclude_str) > 0
 			let grep_exclude_str= 'grep'.grep_exclude_str.' | '
 		endif
-		let command=
-			\ 'find '.shellescape(self.dir.path).' -type f -name '.extension_search_str
+		let command= 'find '.shellescape(self.dir.path)
+		" for include_dir_name in a:include_dir_name_list
+		" 	" code to convert list of relative directory names into a list of absolute paths
+		" 	let include_dir_path= self.dir.get_relative_dir(include_dir_name).path
+		" 	let command= command.' '.shellescape(include_dir_path)
+		" endfor
+		let command= command.' -type f -name '.extension_search_str
 			\ .' | '.grep_exclude_str.'xargs -d '."'\n' ".self.ctags_path.' --append=yes -f '.shellescape(self.path)
 		call L_shell().run(command)
 	endfunction
