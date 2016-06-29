@@ -28,7 +28,7 @@ function! project_tags_tags_file#new(dir, file_extension)
 		let command=
 			\ 'find '.shellescape(self.dir.path).' -type f -name '.extension_search_str
 			\ .' | '.grep_exclude_str.'xargs -d '."'\n' ".self.ctags_path.' --append=yes -f '.shellescape(self.path)
-		call Shell().run(command)
+		call L_shell().run(command)
 	endfunction
 
 	function! tags_file.readable()
