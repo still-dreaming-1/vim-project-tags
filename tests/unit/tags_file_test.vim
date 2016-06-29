@@ -1,7 +1,7 @@
 UTSuite tags_file
 
 function! s:Setup()
-	let s:stopwatch= Stopwatch()
+	let s:stopwatch= L_stopwatch()
 	call s:stopwatch.start()
 endfunction
 

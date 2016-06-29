@@ -15,7 +15,7 @@ function! s:safe_teardown()
 endfunction
 
 function! s:Setup()
-	let s:stopwatch= Stopwatch()
+	let s:stopwatch= L_stopwatch()
 	call s:stopwatch.start()
 	call s:safe_teardown()
 	call s:setup_script_vars()
