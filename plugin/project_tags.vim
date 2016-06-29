@@ -23,7 +23,7 @@
 function! s:GenerateTags(file_extension)
 	call g:l.log('starting GenerateTags')
 	let project_root_dir= project_tags#find_project_root(L_current_buffer().dir())
-	if project_root_dir == Null()
+	if project_root_dir == L_null()
 		call g:l.log('No project root found. Not generating tags')
 		return
 	endif

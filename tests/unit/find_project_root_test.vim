@@ -38,11 +38,11 @@ function! s:Test_when_there_is_no_project_root()
 	let dir= {}
 	let dir.get_contained_file= function("s:get_not_readable_stub")
 	function! dir.parent()
-		return Null()
+		return L_null()
 	endfunction
 
 	let root= project_tags#find_project_root(dir)
-	AssertEquals(Null(), root)
+	AssertEquals(L_null(), root)
 endfunction
 
 function! s:Test_when_parent_is_project_root()

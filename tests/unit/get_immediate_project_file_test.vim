@@ -40,9 +40,9 @@ function! s:Test_when_there_not_has_project_file()
 	let dir= {}
 	let dir.get_contained_file= function("s:get_not_readable_stub")
 	function! dir.parent()
-		return Null()
+		return L_null()
 	endfunction
 
 	let project_file= project_tags#get_immediate_project_file(dir)
-	AssertEquals(Null(), project_file)
+	AssertEquals(L_null(), project_file)
 endfunction

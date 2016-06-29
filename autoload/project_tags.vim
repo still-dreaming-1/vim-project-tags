@@ -7,12 +7,12 @@ endfunction
 
 function! project_tags#find_project_root(dir)
 	let proj_conf_file= project_tags#get_immediate_project_file(a:dir)
-	if proj_conf_file != Null()
+	if proj_conf_file != L_null()
 		return a:dir
 	endif
 	let parent_dir= a:dir.parent()
-	if parent_dir == Null()
-		return Null()
+	if parent_dir == L_null()
+		return L_null()
 	endif
 	return project_tags#find_project_root(parent_dir)
 endfunction
@@ -22,5 +22,5 @@ function! project_tags#get_immediate_project_file(dir)
 	if proj_conf_file.readable()
 		return proj_conf_file
 	endif
-	return Null()
+	return L_null()
 endfunction!
