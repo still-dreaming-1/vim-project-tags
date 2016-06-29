@@ -40,7 +40,7 @@ function! s:GenerateTags(file_extension)
 		let tags_file.ctags_path= g:project_tags_ctags_path
 	endif
 	call l#log('before regenerate tags')
-	call tags_file.regenerate_excluding(g:project_tags_exclude)
+	call tags_file.regenerate(g:project_tags_exclude, g:project_tags_include)
 	call l#log('after regenerate tags')
 endfunction
 

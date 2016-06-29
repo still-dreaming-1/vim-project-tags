@@ -13,7 +13,7 @@ function! project_tags_tags_file#new(dir, file_extension)
 		call file.create()
 	endfunction
 
-	function! tags_file.regenerate_excluding(exclude_dir_name_list)
+	function! tags_file.regenerate(exclude_dir_name_list, include_dir_name_list)
 		call self.regenerate_empty()
 		let extension_search_str= L_s(shellescape(self.for_extension)).remove_start().remove_end().str
 		let extension_search_str= "'*.".extension_search_str."'"
