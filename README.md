@@ -7,7 +7,7 @@ Out of the box, this only automatically generates tags for JavaScript and PHP. B
 
 `call project_tags#add_extension('py')`
 
-Here is an example that support for both python and Lua:
+Here is an example that adds support for both python and Lua:
 
 `call project_tags#add_extension(['py', 'lua'])`
 
