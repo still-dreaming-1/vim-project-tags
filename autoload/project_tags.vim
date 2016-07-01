@@ -1,8 +1,12 @@
-function! project_tags#add_extension(file_extension)
+function! project_tags#add_extension(file_extension_or_list)
 	if !exists('g:project_tags_extension_ls')
 		let g:project_tags_extension_ls= L_u_ls()
 	endif
-	call g:project_tags_extension_ls.add(a:file_extension)
+	if type(a:file_extension_or_list) == l_type#string()
+		call g:project_tags_extension_ls.add(a:file_extension_or_list)
+	elseif type(a:file_extension_or_list) == l_type#list()
+		call g:project_tags_extension_ls.extend(a:file_extension_or_list)
+	endif
 endfunction
 
 function! project_tags#find_project_root(dir)

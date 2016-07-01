@@ -44,8 +44,7 @@ function! s:GenerateTags(file_extension)
 	call l#log('after regenerate tags')
 endfunction
 
-call project_tags#add_extension('php')
-call project_tags#add_extension('js')
+call project_tags#add_extension(['php', 'js'])
 augroup <SID>mapping_group
 	" removes all autocmd in group
 	autocmd!
