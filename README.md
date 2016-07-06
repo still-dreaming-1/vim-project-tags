@@ -16,7 +16,7 @@ In Vim and Noevim there are features and plugins that provide word/code completi
 
 **Languages**
 
-Out of the box, this only automatically generates tags for JavaScript and PHP. But you can easily use this plugin with other ctags compatible languages just by specifying file extensions you want to work with. Just call the `project_tags#add_extension()` function in your config and pass it a string with the file extension of the language you want to create tags for. Alternatively, you can also pass in a list of file extentions to add support for multiple languages at once. This only works for languages that rely on a single file extension. In other words, it won't work with c because it is split between .c and .h files. Here is an example that adds support for python:
+Out of the box, this only automatically generates tags for JavaScript, PHP, and VimL/Vimscript. But you can easily use this plugin with other ctags compatible languages just by specifying file extensions you want to work with. Just call the `project_tags#add_extension()` function in your config and pass it a string with the file extension of the language you want to create tags for. Alternatively, you can also pass in a list of file extentions to add support for multiple languages at once. This only works for languages that rely on a single file extension. In other words, it won't work with c because it is split between .c and .h files. Here is an example that adds support for python:
 
 `call project_tags#add_extension('py')`
 
