@@ -36,8 +36,10 @@ Exclude directory option:
 
 Inside the project configuration file, you have the option of excluding directories that you don't want to create tags from. Be careful what you place in this file, as it will be sourced and ran as VimL code inside your Vim. Here is an example of using the exclude directory option:
 `let g:project_tags_exclude= ['mobile', 'generated_code']`
-If you place that line inside your project configuration file, your tags files will not contain tag data from source files inside any subdirectories named "mobile" or "generated_code". The excluded directories will be treated as relative paths from the project file. This may be a useful feature if you frequently find yourself matching false positives when trying to do a code lookup based on tags and the false positives are all inside a specific directory. There is a very specific use case where this feature will be very useful after the include directory option is developed.
+If you place that line inside your project configuration file, your tags files will not contain tag data from source files inside any subdirectories named "mobile" or "generated_code". The excluded directories will be treated as relative paths from the project file. This may be a useful feature if you frequently find yourself matching false positives when trying to do a code lookup based on tags and the false positives are all inside a specific directory. The exclude and include options can be helpful when used together on the same project.
 
 Include directory option:
 
-Coming soon.
+Inside the project configuration file, you have the option of including extra directories that you want to create tags from. Normally you don't need to use this as tags will be generated for code in your project, but you can use this to generate tags from files in a different location.  Be careful what you place in this file, as it will be sourced and ran as VimL code inside your Vim. Here is an example of using the exclude directory option:
+`let g:project_tags_include= ['../../some library directory']`
+If you place that line inside your project configuration file, your tags files will also contain tag data from source files inside that directory relative to your project configuration file. This is useful if you use a library from a different location. It is also useful when you are using the exclude option, but still want to generate tags from the rest of the project inside the directory being excluded.
