@@ -21,9 +21,6 @@ You can also provide a custom executable name or full path to to your ctags, but
 
 Install it the normal way you install Vim plugins. This also depends on the [vim-elhiv](https://github.com/still-dreaming-1/vim-elhiv/tree/master) plugin, so you will have to install that as well. You need to create a file named ".project_tags.config.vim" and place it in the project root directory of code projects you wish to use this plugin with.
 
-**Coming soon**
-* More options to define your project structure inside your project configuration files for an even better tags experience.
-
 **Versions**
 
 Use the latest commit on the master branch, that is the most stable commit. Do not use the latest tag as there may be new commits on master that keep it compatible with the master branch of the elhiv dependency. I only merge the develop branch into master after doing a release or making changes to keep the master branch compatible with the master branch of the elhiv dependency. The master branch works correctly with the latest master branch commit in the vim-elhiv library plugin. Unless you want to contribute code or help me debug, I don't recommend using the develop branch. If you do use the develop branch, realize it is designed to be used with the develop branch of the vim-elhiv library plugin. I haven't yet figured out a good way to tie specific tagged version releases to a specific tagged version of vim-elhiv. If you want to use an older tagged version you will have to compare the commit date and time to that of the commits to vim-elhiv and try it with the vim-elhiv commit just before the vim-project-tags tag/release. If that doesn't work sometimes I find a bug in vim-elhiv and quickly fix it so it may work better with the following vim-elhiv commit. I use automated tests to keep the latest version / master commit stable, so I really recommend just using that.
