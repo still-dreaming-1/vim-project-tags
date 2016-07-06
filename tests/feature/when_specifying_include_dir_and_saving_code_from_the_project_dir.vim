@@ -73,19 +73,19 @@ function! s:Test_accepted_project_file_include_setting()
 	AssertEquals('../include dir', g:project_tags_include[0])
 endfunction
 
-" function! s:Test_created_tags_file()
-	" Assert s:phptags_file.readable()
-	" Assert s:phptags_file.writable()
-" endfunction
+function! s:Test_created_tags_file()
+	Assert s:phptags_file.readable()
+	Assert s:phptags_file.writable()
+endfunction
 
-" function! s:Test_only_2_files_in_proj_dir()
-	" let files= s:proj_dir.get_all_files()
-	" AssertEquals(2, len(files))
-" endfunction
+function! s:Test_3_files_in_proj_dir()
+	let files= s:proj_dir.get_all_files()
+	AssertEquals(3, len(files))
+endfunction
 
-" function! s:Test_tags_file_does_contain_tags_from_included_dir()
-	" call s:phptags_file.edit()
-	" normal! gg
-	" let line_num= search('supported_file')
-	" AssertEquals(1, line_num)
-" endfunction
+function! s:Test_tags_file_does_contain_tags_from_included_dir()
+	call s:phptags_file.edit()
+	normal! gg
+	let line_num= search('supported_file')
+	AssertEquals(1, line_num)
+endfunction
