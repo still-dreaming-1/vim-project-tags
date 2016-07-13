@@ -12,6 +12,9 @@ endfunction
 
 function! s:Test_path()
 	let dir= L_dir('/dkjfkdjfkdj')
-	let tags_file= project_tags_tags_file#new(dir, 'php')
+	let php= {}
+	let php.tags_filename= 'phptags'
+	let php.file_extension_list= ['php']
+	let tags_file= project_tags_tags_file#new(dir, php)
 	Assert L_s(tags_file.path).starts_with(dir.path)
 endfunction

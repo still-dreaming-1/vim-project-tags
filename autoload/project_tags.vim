@@ -1,12 +1,13 @@
-function! project_tags#add_extension(file_extension_or_list)
-	if !exists('g:project_tags_extension_ls')
-		let g:project_tags_extension_ls= L_u_ls()
+function! project_tags#add_language(tags_filename, file_extension_list)
+	call l#log('project_tags autoload add_language() start')
+	if !exists('g:project_tags_language_ls')
+		let g:project_tags_language_ls= []
 	endif
-	if type(a:file_extension_or_list) == l_type#string()
-		call g:project_tags_extension_ls.add(a:file_extension_or_list)
-	elseif type(a:file_extension_or_list) == l_type#list()
-		call g:project_tags_extension_ls.extend(a:file_extension_or_list)
-	endif
+	let language= {}
+	let language.tags_filename= a:tags_filename
+	let language.file_extension_list= a:file_extension_list
+	call add(g:project_tags_language_ls, language)
+	call l#log('project_tags autoload add_language() end')
 endfunction
 
 function! project_tags#find_project_root(dir)

@@ -11,5 +11,5 @@ function! s:Teardown()
 endfunction
 
 function! s:Test_supports_more_than_1_file_extension()
-	Assert g:project_tags_extension_ls.len() > 1
+	Assert len(g:project_tags_language_ls) > 1
 endfunction

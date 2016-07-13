@@ -48,6 +48,8 @@ function! s:Teardown()
 endfunction
 
 function! s:Test_created_tags_file()
+	let string= s:phptags_file.path
+	Comment string
 	Assert s:phptags_file.readable()
 endfunction
 
