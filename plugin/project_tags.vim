@@ -43,9 +43,9 @@ function! s:GenerateTags(language)
 	call l#log('after regenerate tags')
 endfunction
 
-call project_tags#add_language('jstags', ['js'])
-call project_tags#add_language('vimtags', ['vim'])
-call project_tags#add_language('phptags', ['php'])
+call project_tags#add_language('js')
+call project_tags#add_language('vim')
+call project_tags#add_language('php')
 call project_tags#add_language('ctags', ['c', 'h'])
 augroup <SID>mapping_group
 	" removes all autocmd in group
