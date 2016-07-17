@@ -4,7 +4,7 @@ An improved tags experience based on the concept of projects.
 
 **Context**
 
-This will search for your project root and save separate tag files per programming language for your source code. It works with all languages supported by ctags with the exception of languages requiring source code with more than one file extension like C and C++. This plugin creates tag files automatically when you save code files. If you save a .js file, it only creates tags for other .js files in the project, and saves them in their own jstags file. If you save a .php file, it generates tags in a separate phptags file. When you are editing a file, and try to do a code lookup using tags, it will only search one tags file matching the language of the file you are editing, based on file extension. The point of all this is to avoid false positives and keep the tag matches to a minimum.
+This will search for your project root and save separate tag files per programming language for your source code. This plugin creates tag files automatically when you save code files. If you save a .js file, it only creates tags for other .js files in the project, and saves them in their own jstags file. If you save a .php file, it generates tags in a separate phptags file. When you are editing a file, and try to do a code lookup using tags, it will only search one tags file matching the language of the file you are editing, based on file extension. The point of all this is to avoid false positives and keep the tag matches to a minimum.
 
 **Purpose**
 
@@ -16,13 +16,13 @@ In Vim and Noevim there are features and plugins that provide word/code completi
 
 **Languages**
 
-Out of the box, this only automatically generates tags for JavaScript, PHP, and VimL/Vimscript. But you can easily use this plugin with other ctags compatible languages just by specifying file extensions you want to work with. Just call the `project_tags#add_extension()` function in your config and pass it a string with the file extension of the language you want to create tags for. Alternatively, you can also pass in a list of file extentions to add support for multiple languages at once. This only works for languages that rely on a single file extension. In other words, it won't work with c because it is split between .c and .h files. Here is an example that adds support for python:
+Out of the box, this only automatically generates tags for JavaScript, PHP, and VimL/Vimscript. But you can easily use this plugin with other ctags compatible languages just by specifying file extensions you want to work with. Just call the `project_tags#add_language()` function in your config and pass it a string with the file extension of the language you want to create tags for. Alternatively, you can also pass in a list of file extentions to add support for multiple languages at once. This only works for languages that rely on a single file extension. In other words, it won't work with c because it is split between .c and .h files. Here is an example that adds support for python:
 
-`call project_tags#add_extension('py')`
+`call project_tags#add_language('py')`
 
 Here is an example that adds support for both python and Lua:
 
-`call project_tags#add_extension(['py', 'lua'])`
+`call project_tags#add_language(['py', 'lua'])`
 
 You don't need to worry about whether you are adding support for an already supported language. If you call that function with a duplicate file extension, it will just be ignored. This means that if you prefer, you can just call that function for each file extension you want to create tags for without worrying about whether or not the plugin already has built in support for that language.
 
@@ -53,3 +53,19 @@ Include directory option:
 Inside the project configuration file, you have the option of including extra directories that you want to create tags from. Normally you don't need to use this as tags will be generated for code in your project, but you can use this to generate tags from files in a different location.  Be careful what you place in this file, as it will be sourced and ran as VimL code inside your Vim. Here is an example of using the exclude directory option:
 `let g:project_tags_include= ['../../some library directory']`
 If you place that line inside your project configuration file, your tags files will also contain tag data from source files inside that directory relative to your project configuration file. This is useful if you use a library from a different location. It is also useful when you are using the exclude option, but still want to generate tags from the rest of the project inside the directory being excluded.
+
+Multiple file types in one tags file:
+
+Even though the main point of this plugin is to separate file extensions into separate tags files, sometimes you actually want some in the same file. This might be the case if you are working with C code. You may want tags from your .c file and your .h files to exist in the same tags file. In that case there are advantages and disadvantages to keeping them separate or combining them. Combining them should make code completion via tag files more useful if you write your definition in a .h file first and your implemenation in a .c file later. However, it may make jump to work worse if you are trying to jump to the implementation in you .c files and it takes you to the defininition in a .h file. You also might be working with sloppy code where multiple languages exist in the same source file, so this may be another reason to combine multiple file extension types into a single tags file. Here is how you would add C support and combine .c and .h tags:
+
+'call project_tags#add_language('ctags', ['c', 'h'])'
+
+Notice you also have to specify the tags filename as the first parmeter. You can call it whatever you want, which brings me to the next option.
+
+Custom tags file names:
+
+You can create custom filenames for you tags files. Let's say you are adding python support, your tags files don't need to be called pytags:
+
+'call project_tags#add_language('nopythontagshere', 'py')'
+
+Notice how in that case you can keep 'py' as a string, it doesn't need to be in a list if you are just passing one file extension.
