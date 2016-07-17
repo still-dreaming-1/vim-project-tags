@@ -1,8 +1,11 @@
-function! project_tags_tags_file#new(dir, language)
+function! project_tags_tags_file#new(...)
+	let dir= a:1
+	let tags_filename= a:2
+	let file_extension_list= a:3
 	let tags_file= {}
-	let tags_file.for_extension_ls= a:language.file_extension_list
-	let tags_file.dir= L_dir(a:dir.path)
-	let tags_file.path= a:dir.get_contained_file(a:language.tags_filename).path
+	let tags_file.for_extension_ls= file_extension_list
+	let tags_file.dir= L_dir(dir.path)
+	let tags_file.path= dir.get_contained_file(tags_filename).path
 	let tags_file.ctags_path= 'ctags'
 
 	function! tags_file.regenerate_empty()

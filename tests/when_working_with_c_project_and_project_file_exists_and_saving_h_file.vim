@@ -13,6 +13,7 @@ function! s:Setup()
 	let s:stopwatch= L_stopwatch()
 	call s:stopwatch.start()
 	call s:safe_teardown()
+	call project_tags#add_language('ctags', ['c', 'h'])
 	call s:setup_script_vars()
 	Assert! s:static_c_proj_dir.exists()
 	Assert! !s:data_dir.exists()
@@ -34,6 +35,8 @@ function! s:Setup()
 endfunction
 
 function! s:safe_teardown()
+	call project_tags#remove_all_languages()
+	call project_tags#add_built_in_language_support()
 	call s:setup_script_vars()
 	if s:data_dir.exists()
 		call s:data_dir.delete()
@@ -41,6 +44,8 @@ function! s:safe_teardown()
 endfunction
 
 function! s:Teardown()
+	call project_tags#remove_all_languages()
+	call project_tags#add_built_in_language_support()
 	call s:setup_script_vars()
 	Assert s:data_dir.exists()
 	call s:data_dir.delete()
@@ -50,7 +55,7 @@ function! s:Teardown()
 endfunction
 
 function! s:Test_created_tags_file()
-	Assert s:ctags_file.readable()
+	Assert! s:ctags_file.readable()
 endfunction
 
 function! s:Test_tags_file_not_empty()
