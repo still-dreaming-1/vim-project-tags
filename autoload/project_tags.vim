@@ -1,24 +1,3 @@
-" Finding the project root and creating tag files for different
-" languages works well enough, but sometimes, more fine grained control is
-" wanted. For example I work on a web project where the root project
-" directory has a mobile directory inside it. The mobile directory depends on
-" code from the rest of the project, but the rest of the project never
-" depends on the code from the mobile directory. There needs to be a way to
-" define the relationships between directories. In this case, I want
-" the mobile directory to be excluded when generating tags in the main
-" directory. I want the mobile directory to contain its own tag files that
-" only point to stuff inside that directory. When editing files in the mobile
-" directory, I want vim to look in the tag files stored there first, and only
-" look at the main tag files if not found in the mobile ones. When a file
-" from the mobile directory is saved, the tag file in that directory for the
-" approriate language should be regenerated. Also, the appropriate tag file in
-" the main directory should also be regenerated, following the normal rules of
-" excluding the mobile directory.
-" The simplest solution I can think of for the file that defines relationships
-" is to have a .vim file with a specific name. It will get sourced, and it
-" should contain settings stored in expected variable names. It is ok if it
-" overwrites previously stored values in this variable because the file is
-" sourced just before the variable is used.
 function! project_tags#generate_tags(...)
 	call l#log('starting project_tags#generate_tags')
 	let tags_filename= a:1
