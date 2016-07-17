@@ -58,7 +58,7 @@ Multiple file types in one tags file:
 
 Even though the main point of this plugin is to separate file extensions into separate tags files, sometimes you actually want some in the same file. This might be the case if you are working with C code. You may want tags from your .c file and your .h files to exist in the same tags file. In that case there are advantages and disadvantages to keeping them separate or combining them. Combining them should make code completion via tag files more useful if you write your definition in a .h file first and your implemenation in a .c file later. However, it may make jump to work worse if you are trying to jump to the implementation in you .c files and it takes you to the defininition in a .h file. You also might be working with sloppy code where multiple languages exist in the same source file, so this may be another reason to combine multiple file extension types into a single tags file. Here is how you would add C support and combine .c and .h tags:
 
-'call project_tags#add_language('ctags', ['c', 'h'])'
+`call project_tags#add_language('ctags', ['c', 'h'])`
 
 Notice you also have to specify the tags filename as the first parmeter. You can call it whatever you want, which brings me to the next option.
 
@@ -66,6 +66,6 @@ Custom tags file names:
 
 You can create custom filenames for you tags files. Let's say you are adding python support, your tags files don't need to be called pytags:
 
-'call project_tags#add_language('nopythontagshere', 'py')'
+`call project_tags#add_language('nopythontagshere', 'py')`
 
 Notice how in that case you can keep 'py' as a string, it doesn't need to be in a list if you are just passing one file extension.
