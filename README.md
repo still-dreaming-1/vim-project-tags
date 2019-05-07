@@ -8,6 +8,8 @@ This is an abandoned project. I personally no longer have any use for tags, and 
 
 When I say I no longer whish to maintain this plugin, what I mean is, this plugin relies on my vim-eliv library, and I no longer wish to update the master branch of this plugin to be compatible with the latest code in the master branch of vim-elhiv. Theoretically, you should be able to compare the date of the last tagged release of this plugin, and use a commit from the vim-elhiv master branch just before or after that. If someone requests my help in an issue, I will update these instructions to be more helpful.
 
+If you feel this lack of continued support for this project will affect you negatively, please file an issue. I may be willing to update this plugin to have no external dependencies such that all you ever need to do is use the latest commit from the master branch. This would mean I don't need to update anything to maintain it other than possibly address issues or fix bugs as needed. This would also make it easier to install as you would only need to add it with your plugin manager.
+
 
 **Context**
 
