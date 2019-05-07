@@ -2,6 +2,8 @@
 An improved tags experience based on the concept of projects.
 
 **Warning**
+
+
 This is an abandoned project. I personally no longer have any use for tags, and I no longer wish to maintaint this project. Insted of tags, I recommend using a language server or something like that which understands your code more deeply and uses the context of where you are performing an action to improve the accuracy of the result. For me tags continued to have too many false positives for my purposes even after refining this plugin, and my final conclusion is that tags themselves are a poor fit for what I was trying to use them for (mostly code definition lookup).
 
 When I say I no longer whish to maintain this plugin, what I mean is, this plugin relies on my vim-eliv library, and I no longer wish to update the master branch of this plugin to be compatible with the latest code in the master branch of vim-elhiv. Theoretically, you should be able to compare the date of the last tagged release of this plugin, and use a commit from the vim-elhiv master branch just before or after that. If someone requests my help in an issue, I will update these instructions to be more helpful.
